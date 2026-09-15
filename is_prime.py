@@ -12,10 +12,24 @@ def find_primes(start: int, end: int) -> set[int]:
 
     return ans
 
+def countPrimes(n: int):
+    # counts the number of prime numbers strictly less than n
+    # time complexity equal to O(n log n)
+    ans = [True] * (max(2, n))
+    ans[0] = False
+    ans[1] = False
+    s = len(ans) - 2
+
+    for x in range(2, n):
+        if ans[x] and x * x < n:
+            for i in range(x * x, n, x):
+                s -= ans[i]
+                ans[i] = False
+    return s
+
 if __name__ == "__main__":
-    start = int(input("Enter the starting number: "))
-    end = int(input("Enter the ending number: "))
+    n = int(input("Enter n: "))
 
-    primes = find_primes(start, end)
+    primes = countPrimes(n)
 
-    print(f"Prime numbers between {start} and {end}: {primes}")
+    print(f"Count prime numbers stricly than n: {primes}")
