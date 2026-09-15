@@ -12,6 +12,16 @@ def find_primes(start: int, end: int) -> set[int]:
 
     return ans
 
+def is_prime(n: int) -> bool:
+    ans = set()
+
+    for x in range(2, n + 1):
+        if any(x % i == 0 for i in ans):
+            continue
+        ans.add(x)
+
+    return n in ans
+
 def countPrimes(n: int):
     # counts the number of prime numbers strictly less than n
     # time complexity equal to O(n log n)
@@ -28,8 +38,8 @@ def countPrimes(n: int):
     return s
 
 if __name__ == "__main__":
-    n = int(input("Enter n: "))
+    n = int(input("Enter number: "))
 
-    primes = countPrimes(n)
+    primes = is_prime(n)
 
-    print(f"Count prime numbers stricly than n: {primes}")
+    print(f"is_prime : {primes}")
